@@ -46,7 +46,7 @@ const Todo = ({data,deleteTodo})=>{
         {text}
       </label>
       <form className={formClass}>
-        <input className="form-control" type={"text"} placeholder={text} onChange={(e)=>{
+        <input className="form-control" type={"text"} value={text} onChange={(e)=>{
           handleEdit(e.target.value);
           //console.log(text);
         }} />
