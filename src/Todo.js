@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Form from 'react-bootstrap/Form';
 
 
-const Todo = ({data})=>{
+const Todo = ({data,deleteTodo})=>{
   const[ischecked, setIschecked] = useState(false);
 
   let className = 'form-check-label';
@@ -16,6 +16,9 @@ const Todo = ({data})=>{
     setIschecked(!ischecked);
     console.log(ischecked);
   }
+  const todoDelete = () =>{
+    deleteTodo(data.id);
+  }
 
   return(
     <div className="form-check">
@@ -23,6 +26,7 @@ const Todo = ({data})=>{
       <label className={className} style={deco} htmlFor={`todo${data.id}`}>
         {data.text}
       </label>
+      <button type="button" className="btn btn-danger btn-sm" onClick={todoDelete}>Delete</button>
     </div>
   )
 }
