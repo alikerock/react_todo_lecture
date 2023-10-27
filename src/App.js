@@ -6,36 +6,25 @@ import Todo from './Todo';
 
 function App() {
 
-  // window.localStorage.setItem('name', '홍길동');
-  // console.log(window.localStorage.getItem('name'));
-  // window.localStorage.removeItem('name');
-  // console.log(window.localStorage.getItem('name'));
-
   const [todoid, setTodoid] = useState(0);
-  const [todo,setTodo] = useState([]);
-
-  // const objString = JSON.stringify(todo); //객체, 배열 -> 문자열
-  // window.localStorage.setItem('todo', objString); //스토리지 저장
-  // window.localStorage.getItem('todo') //스토리지 값 읽기
-  // const personObj = JSON.parse(personString);//문자열 -> 객체, 배열
-
+  const [todo,setTodo] = useState(null);
 
   const getTodoList = ()=>{
     let todoListFromStorage = window.localStorage.getItem('todo');
-    console.log(todoListFromStorage);
-    if(todoListFromStorage !== null){
+
+    if(todoListFromStorage !== 'null'){ //todoListFromStorage의 값은 string
       //값이 있다면 
       const todoObj = JSON.parse(todoListFromStorage);      
-      let lastId = todoObj[todoObj.length -1 ].id;
+      let lastId = todoObj[todoObj.length-1].id;
       setTodo(todoObj);
-      setTodoid(lastId);      
-      console.log(todoid);
-    }
+      setTodoid(lastId);        
+    } 
   }
   useEffect(()=>{
-    getTodoList();
+    getTodoList(); //첫 렌더링때 한번만 실행
   },[])
-  
+
+  let todos = null;
 
   const deleteTodo = (id) =>{
     let newTodos = [...todo];
@@ -49,10 +38,11 @@ function App() {
     newTodos[index] = {id:id, text:val, checked:false};
     setTodo(newTodos);
   }
-
-  let todos = todo.map(item=>(
-    <Todo data={item} key={item.id} deleteTodo={deleteTodo} update={update} />
-  ));
+  if(todo !== null){
+    todos = todo.map(item=>(
+      <Todo data={item} key={item.id} deleteTodo={deleteTodo} update={update} />
+    ));
+  }
 
   let addTodo = (value)=>{
     let newTodos = [...todo];
@@ -69,7 +59,7 @@ function App() {
   }
 
   useEffect(()=>{
-    setStorage();
+    setStorage(); //첫 렌더링때 한번 실행후, todo가 변경될때 마다 실행
   },[todo])
 
   return (

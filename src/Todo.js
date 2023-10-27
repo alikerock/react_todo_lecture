@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Form from 'react-bootstrap/Form';
-
 
 const Todo = ({data,deleteTodo,update})=>{
   const[mode, setMode] = useState('read');
@@ -32,7 +30,7 @@ const Todo = ({data,deleteTodo,update})=>{
     setMode('edit');
   }  
   const handleEdit = (val) =>{
-    setText(val) ;
+    setText(val) ; //수정 내용 반영
     console.log(text);
   }  
   const changeMode = (val) =>{
@@ -50,7 +48,6 @@ const Todo = ({data,deleteTodo,update})=>{
       <form className={formClass} onSubmit={updateTodo}>
         <input className="form-control" type={"text"} value={text} onChange={(e)=>{
           handleEdit(e.target.value);
-          //console.log(text);
         }} />
         <button type="submit" className="btn btn-secondary btn-sm">Update</button>
         <button type="button" className="btn btn-secondary btn-sm" onClick={()=>{
