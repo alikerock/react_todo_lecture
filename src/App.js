@@ -11,8 +11,7 @@ function App() {
   // window.localStorage.removeItem('name');
   // console.log(window.localStorage.getItem('name'));
 
-  const [todoid, setTodoid] = useState(2);
-
+  const [todoid, setTodoid] = useState(0);
   const [todo,setTodo] = useState([]);
 
   // const objString = JSON.stringify(todo); //객체, 배열 -> 문자열
