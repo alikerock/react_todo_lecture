@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Form from 'react-bootstrap/Form';
 
 
-const Todo = ({data,deleteTodo})=>{
+const Todo = ({data,deleteTodo,update})=>{
   const[mode, setMode] = useState('read');
   const[ischecked, setIschecked] = useState(false);
   const[text, setText] = useState(data.text);
@@ -38,19 +38,21 @@ const Todo = ({data,deleteTodo})=>{
   const changeMode = (val) =>{
      setMode(val);
   }  
-
+  const updateTodo = () =>{
+    update(data.id, text);
+  }
   return(
     <div className="form-check">
       <input className="form-check-input " type="checkbox" value="" id={`todo${data.id}`} onChange={handleCheckboxClick} />
       <label className={className} style={deco} htmlFor={`todo${data.id}`}>
         {text}
       </label>
-      <form className={formClass}>
+      <form className={formClass} onSubmit={updateTodo}>
         <input className="form-control" type={"text"} value={text} onChange={(e)=>{
           handleEdit(e.target.value);
           //console.log(text);
         }} />
-        <button type="button" className="btn btn-secondary btn-sm">Update</button>
+        <button type="submit" className="btn btn-secondary btn-sm">Update</button>
         <button type="button" className="btn btn-secondary btn-sm" onClick={()=>{
           changeMode('read');
         }}>cancel</button>
