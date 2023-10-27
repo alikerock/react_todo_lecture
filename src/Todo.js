@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 const Todo = ({data,deleteTodo})=>{
   const[mode, setMode] = useState('read');
   const[ischecked, setIschecked] = useState(false);
+  const[text, setText] = useState(data.text);
 
   let className = 'form-check-label';
   let formClass = 'hidden';
@@ -30,8 +31,9 @@ const Todo = ({data,deleteTodo})=>{
   const todoEdit = () =>{
     setMode('edit');
   }  
-  const handleEdit = () =>{
-    
+  const handleEdit = (val) =>{
+    setText(val) ;
+    console.log(text);
   }  
   const changeMode = (val) =>{
      setMode(val);
@@ -41,10 +43,13 @@ const Todo = ({data,deleteTodo})=>{
     <div className="form-check">
       <input className="form-check-input " type="checkbox" value="" id={`todo${data.id}`} onChange={handleCheckboxClick} />
       <label className={className} style={deco} htmlFor={`todo${data.id}`}>
-        {data.text}
+        {text}
       </label>
       <form className={formClass}>
-        <input className="form-control" type="text" value={data.text} onChange={handleEdit} />
+        <input className="form-control" type={"text"} placeholder={text} onChange={(e)=>{
+          handleEdit(e.target.value);
+          //console.log(text);
+        }} />
         <button type="button" className="btn btn-secondary btn-sm">Update</button>
         <button type="button" className="btn btn-secondary btn-sm" onClick={()=>{
           changeMode('read');
