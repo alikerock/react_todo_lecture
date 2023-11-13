@@ -12,7 +12,7 @@ function App() {
   const getTodoList = ()=>{
     let todoListFromStorage = window.localStorage.getItem('todo');
 
-    if(todoListFromStorage !== 'null'){ //todoListFromStorage의 값은 string
+    if(todoListFromStorage !== null){ //todoListFromStorage의 값은 string
       //값이 있다면 
       const todoObj = JSON.parse(todoListFromStorage);      
       let lastId = todoObj[todoObj.length-1].id;
